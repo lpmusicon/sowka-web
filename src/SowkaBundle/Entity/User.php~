@@ -37,6 +37,9 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(name="name", type="string", length=255)
+     */
     private $name;
 
     /**
@@ -299,5 +302,29 @@ class User implements UserInterface, \Serializable
     public function getReward()
     {
         return $this->reward;
+    }
+
+    /**
+     * Set completedSetup
+     *
+     * @param boolean $completedSetup
+     *
+     * @return User
+     */
+    public function setCompletedSetup($completedSetup)
+    {
+        $this->completedSetup = $completedSetup;
+
+        return $this;
+    }
+
+    /**
+     * Get completedSetup
+     *
+     * @return boolean
+     */
+    public function getCompletedSetup()
+    {
+        return $this->completedSetup;
     }
 }

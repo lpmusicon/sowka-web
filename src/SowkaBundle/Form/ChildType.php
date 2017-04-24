@@ -8,18 +8,28 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use SowkaBundle\Entity\Reward;
 
-class UserType extends AbstractType
+class ChildType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
+            ->add('name', TextType::class)
+            ->add('imagePath', FileType::class)
+            ->add('isUsingAvatar', CheckboxType::class,
+                [ 'required' => false ])
+            ->add('isMaleAvatar', CheckboxType::class,
+                [ 'required' => false])
+            ->add('singleReward', EntityType::class, [
+                'class' => 'SowkaBundle\Entity\Reward',
+                'choice_label' => 'image',
+                'multiple' => false,
+                'expanded' => true
+            ])
         ;
     }
 

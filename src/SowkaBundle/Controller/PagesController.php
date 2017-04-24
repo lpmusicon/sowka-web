@@ -4,6 +4,7 @@ namespace SowkaBundle\Controller;
 
 use SowkaBundle\Entity\User;
 use SowkaBundle\Form\UserType;
+use SowkaBundle\Form\ChildType;
 use SowkaBundle\Entity\Reward;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -84,7 +85,20 @@ class PagesController extends Controller
         $rewardsRepository = $doctrine->getRepository('SowkaBundle:Reward');
         $rewards = $rewardsRepository->findAll();
 
+        $form = $this->createForm(ChildType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
         return $this->render('SowkaBundle:Main:setup.html.twig', [
+            'form' => $form->createView(),
             'rewards' => $rewards
         ]);
     }

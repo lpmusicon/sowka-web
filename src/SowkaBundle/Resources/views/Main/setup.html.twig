@@ -11,6 +11,9 @@
             <div class="navTitle">Dodaj profil dziecka</div>
         </nav>
         <div id="container">
+            {{ 
+                form(form)
+            }}
             <form
                 method="post"
                 accept-charset="utf-8"
@@ -23,12 +26,6 @@
                 <img class="avatar" isAvatar="true" isMale="false" src="{{ asset('assets/img/options/ona.png') }}" onclick="selectPhoto(this);">
             </div>
             <div class="floatingContainer">
-                <!--
-                <div class="genericContainer">
-                    <div class="containerTitle">Wybierz lektora:</div>
-                    <div class="readerOption selected" isMale='true' onclick="swapReader(this);">Męski</div>
-                    <div class="readerOption" isMale='false' onclick="swapReader(this);">Żeński</div>
-                </div>-->
                 <div class="genericContainer">
                     <div class="containerTitle">Wybierz nagrodę:</div>
                     {% for reward in rewards %}
