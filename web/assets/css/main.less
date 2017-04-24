@@ -1,0 +1,152 @@
+@charset "utf-8";
+@import 'shared';
+
+@yellowCategory: #db9704;
+@blueCategory: #243470;
+@greenCategory: #5b9314;
+@violetCategory: #ad3f75;
+
+html {
+    .reset();
+    body {
+        .reset();
+        background: url('../img/indexbg.jpg') top center @backgroundColor;
+        background-repeat: no-repeat;
+        background-size: auto;
+        height: 100%;
+        nav {
+            z-index: 50;
+            background: @secondaryButtonColor;
+            font-family: @mainFont;
+            color: @lightTextColor;
+            font-size: @normalFont;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            .navTitle {
+                display: inline-block;
+                .borderBox();
+                padding: 10px;
+                font-weight: 400;
+            }
+            .actionBtn {
+                cursor: pointer;
+                color: @lightTextColor;
+                .reset();
+                float: right;
+                .borderBox();
+                padding:10px;
+                background: @mainButtonColor;
+                .transition(background, .2s);
+                &:hover {
+                    background: darken(@mainButtonColor, 10%);
+                }
+            }
+        }
+        #container {
+            margin: 60px auto 30px;
+            width: 540px;
+            .category {
+                &[catid='1'] {
+                   background: @greenCategory;
+                   .title {
+                       background: darken(@greenCategory, 5%);
+                   }
+                   &:hover {
+                       background: darken(@greenCategory, 10%);
+                   }
+                }
+                &[catid='2'] {
+                   background: @blueCategory;
+                   .title {
+                       background: darken(@blueCategory, 5%);
+                   }
+                   &:hover {
+                       background: darken(@blueCategory, 10%);
+                   }
+                }
+                &[catid='3'] {
+                   background: @violetCategory;
+                   .title {
+                       background: darken(@violetCategory, 5%);
+                   }
+                   &:hover {
+                       background: darken(@violetCategory, 10%);
+                   }
+                }
+                &[catid='4'] {
+                   background: @yellowCategory;
+                   .title {
+                       background: darken(@yellowCategory, 5%);
+                   }
+                   &:hover {
+                       background: darken(@yellowCategory, 10%);
+                   }
+                }
+                .title {
+                    .borderBox();
+                    .reset();
+                    padding: 20px;
+                }
+                .image {
+                    position: absolute;
+                    top: 64px;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    display: block;
+                    width: 170px;
+                    margin: auto;
+                }
+                .borderBox();
+                position: relative;
+                margin: 10px;
+                font-family: @mainFont;
+                font-size: @normalFont;
+                text-align: center;
+                color: @lightTextColor;
+                letter-spacing: 1px;
+                width: 250px;
+                display: inline-block;
+                height: 250px;
+                cursor: pointer;
+                background-position: center;
+                .transition(background, .2s);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+  html {
+    #container {
+        width: 320px !important;
+        .category {
+            margin: 20px auto !important;
+            display: block !important;
+        }
+    }
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 580px) {
+  html {
+    #container {
+        width: 100% !important;
+        .category {
+            margin: 20px auto !important;
+            width: 260px !important;
+            display: block !important;
+        }
+    }
+  }
+}
+
+@media screen and (min-width: 1921px) {
+  html {
+    body {
+        background-size: cover;
+    }
+  }
+}

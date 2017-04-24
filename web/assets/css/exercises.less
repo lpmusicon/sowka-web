@@ -1,0 +1,105 @@
+@charset "utf-8";
+@import 'shared';
+
+html {
+    .reset();
+    body {
+        font-family: @mainFont;
+        font-size: 0;
+        background: url('../img/indexbg.jpg') top center @backgroundColor;
+        background-repeat: no-repeat;
+        background-size: auto;
+        .reset();
+        nav {
+            font-size: @normalFont;
+            background: @secondaryButtonColor;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            .option {
+                .borderBox();
+                .reset();
+                padding: 10px;
+                display: block;
+                float: right;
+                color: @lightTextColor;
+                background: @mainButtonColor;
+                .transition(background, .2s);
+                cursor: pointer;
+                &:hover {
+                    background: darken(@mainButtonColor, 10%);
+                }
+            }
+            #title {
+                background: @secondaryButtonColor;
+                .borderBox();
+                padding: 10px;
+                color: @lightTextColor;
+            }
+        }
+        #container {
+            font-size: @normalFont;
+            width: 80%;
+            max-width: 960px;
+            margin: 50px auto 10px;
+            color: @lightTextColor;
+            .category {
+                width: 100%;
+                .borderBox();
+                padding: 10px;
+                .name {
+                    text-align: center;
+                    .borderBox();
+                    padding: 10px;
+                    background: darken(@secondaryButtonColor, 10%);
+                }
+                .train, .exercise, .full {
+                    .transition(background, .2s);
+                    cursor: pointer;
+                    &:hover {
+                        background: darken(@mainButtonColor, 10%);
+                    }
+                }
+                .train, .exercise {
+                    text-align: center;
+                    display: inline-block;
+                    width: 50%;
+                    .borderBox();
+                    padding: 10px;
+                    background: @mainButtonColor;
+                }
+                .full {
+                    text-align: center;
+                    width: 100%;
+                    .borderBox();
+                    padding: 10px;
+                    background: @mainButtonColor;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+  html
+  {
+      body {
+        #container {
+              width: 320px !important;
+        }
+    }
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 800px) {
+    body {
+        #container {
+            width: 100% !important;
+        }
+    }
+}
+@media screen and (min-width: 1921px) {
+  body {
+    background-size: cover !important;
+  }
+}

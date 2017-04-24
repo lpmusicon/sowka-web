@@ -1,0 +1,125 @@
+@charset "utf-8";
+@import 'shared';
+
+html {
+  .reset();
+  font-family: @mainFont;
+  font-weight: 300;
+}
+
+body {
+  .reset();
+  background: url('../img/indexbg.jpg') top center @backgroundColor;
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 100%;
+}
+
+#container {
+  margin-top: 230px;
+}
+
+.pagewidth {
+    margin: auto;
+}
+
+.mainBox {
+  .borderBox();
+}
+
+#registerForm {
+  display: none;
+}
+
+.mainBox > form > .input {
+  .reset();
+  .transition(background, .2s);
+  .borderBox();
+  background: @white;
+  font-size: @smallFont;
+  display:block;
+  padding: 10px;
+  width: 100%;
+}
+
+.mainBox > form > .input:hover, .mainBox > form > .input:focus {
+  background: fadeout(@white, 15%);
+}
+
+.mainBox > form > .input:nth-child(n+1) {
+  margin: 5px 0 0;
+}
+
+.mainBox > form > .button {
+  .reset();
+  .transition(background, .2s);
+  .borderBox();
+  color: @lightTextColor;
+  background: @mainButtonColor;
+  font-size: @normalFont;
+  font-family: @mainFont;
+  font-weight: 300;
+  width: 50%;
+  padding: 6px 0;
+}
+
+.mainBox > form > .buttonW100 {
+  width: 100%;
+}
+
+.mainBox > form > .button:hover  {
+  background: darken(@mainButtonColor, 10%);
+}
+
+.mainBox > form > .buttonAlt{
+  background: @secondaryButtonColor;
+}
+
+.mainBox > form > .buttonAlt:hover {
+  background: darken(@secondaryButtonColor, 10%);
+}
+
+footer {
+    color: @darkTextColor;
+    text-transform: uppercase;
+    text-align: right;
+    font-size: @largeFont;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0 10px 5px 0;
+}
+
+footer div strong {
+    font-weight: 400;
+}
+
+#notificationBox {
+  .borderBox();
+  display: none;
+  position: fixed;
+  z-index: 12;
+  top:50px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 10px;
+  font-size: @largeFont;
+  background: @white;
+}
+
+@media screen and (max-width: 320px) {
+  .pagewidth, #notificationBox {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 480px) {
+  .pagewidth, #notificationBox {
+    width: 480px;
+  }
+}
+@media screen and (min-width: 1921px) {
+  body {
+    background-size: cover;
+  }
+}

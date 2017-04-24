@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+#container {
+    width: 80%;
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+}
+
+#container .category {
+    width: 100%;
+    background: rgba(0,0,0,.6);
+    padding: 20px 0;
+    margin: 60px 0 20px;
+    font-family: Lato;
+    letter-spacing: 1px;
+    font-size: 20px;
+    cursor:pointer;
+    color: #fff;
+}

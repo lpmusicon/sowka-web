@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+    <head>
+            <meta charset="utf-8" />
+            <link rel="stylesheet" href="css/index.css" type="text/css" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="js/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="notificationBox"></div>
+        <div id="container">
+            <div class="pagewidth mainBox">
+                <img src="img/logo.png" width="50%" style="margin: auto; display: block" />
+            </div>
+                    <div id="login" class="pagewidth mainBox">
+                            <form autocomplete="on" id="loginForm" method="post">
+                                <input type="email" name="email" placeholder="Adres email" class="input" />
+                                <input type="password" name="password" placeholder="Hasło" class="input" />
+                                <button class="button" id="loginSubmit">Zaloguj się</button><!--
+                            --><button class="button buttonAlt" id="register">Rejestracja</button>
+                            </form>
+                    </div>
+
+                    <div id="registerForm" class="pagewidth mainBox">
+                            <form autocomplete="off">
+                                <input type="text" name="name" placeholder="Imię opiekuna" class="input"/>
+                                <input type="email" name="email" placeholder="Adres email" class="input"/>
+                                <input type="password" name="password" placeholder="Hasło" class="input"/>
+                                <input type="password" name="passwordRepeat" placeholder="Powtórz hasło" class="input"/>
+                                <input id="register_send" type="submit" value="Zarejestruj" class="button buttonW100"/>
+                            </form>
+                    </div>
+            <footer>
+                <div>
+                    <strong>Grzegorz </strong>Mrózek
+                </div>
+                <div>
+                    <strong>Marcin </strong>Wróblewski
+                </div>
+            </footer>
+            <script>
+            $(document).on('click touchdown', '#loginSubmit', function(e){
+                e.preventDefault();
+                var FORM = new FormData();
+                var loginForm = $('#loginForm');
+                var email = $(loginForm).children('input[type="email"]')[0];
+                var password = $(loginForm).children('input[type="password"]')[0];
+                FORM.append('email', email.value);
+                FORM.append('password', password.value);
+                $.ajax({
+                    url: 'login.php',
+                    data: FORM,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function(data){
+                        var response = JSON.parse(data);
+                        console.log(response.visibleText);
+                        if(response.loginPermitted)
+                        {
+                            window.location.href = "main.php";
+                        }
+                        else {
+                            showNotificationBox(response.visibleText);
+                            hideFullBox($('#notificationBox')[0]);
+                        }
+                    }
+                });
+            });
+
+            var registerOpen = false;
+            function registerToggle() {
+                if(!registerOpen) {
+                    $('#container').animate({'margin-top': '135px'}, 250);
+                    $('#registerForm').fadeIn("normal", function(){
+                    });
+                    registerOpen = true;
+                }
+                else {
+                    $('#registerForm').fadeOut(250, function(){
+                        $('#container').animate({'margin-top': '230px'}, 250);
+                    });
+                    registerOpen = false;
+                }
+            };
+
+            $(document).on('click touchdown', '#register', function(e) {
+                e.preventDefault();
+                registerToggle();
+            })
+
+            $(document).on('click touchdown', '#register_send', function(e) {
+                e.preventDefault();
+                var FORM = new FormData();
+                var registerForm = $('#registerForm').children('form');
+                var email = registerForm.children('input[name="email"]')[0];
+                var password = registerForm.children('input[name="password"]')[0];
+                var name = registerForm.children('input[name="name"]')[0];
+                var passwordRepeat = registerForm.children('input[name="passwordRepeat"]')[0];
+
+                FORM.append('email', email.value);
+                FORM.append('password', password.value);
+                FORM.append('passwordRepeat', passwordRepeat.value);
+                FORM.append('name', name.value);
+                
+                $.ajax({
+                    url: 'register.php',
+                    data: FORM,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function(data){
+                        console.log(data);
+                        var response = JSON.parse(data);
+                        console.log(response.visibleText);
+                        showNotificationBox(response.visibleText);
+                        hideFullBox($('#notificationBox')[0]);
+                        if(response.loginPermitted)
+                        {
+                            registerToggle();
+                        }
+                    }
+                });
+            })
+
+            function showNotificationBox(notification) {
+                $('#notificationBox').text(notification);
+                $('#notificationBox').fadeIn("fast");
+            }
+
+            function hideFullBox(item){
+                $(document).mouseup(function (e){ //close (click outside)
+                    var container = $(item);
+                    if (!container.is(e.target)	&& container.has(e.target).length === 0)
+                    {
+                        container.fadeOut();
+                    }
+                });
+            }
+            </script>
+            </div>
+    </body>
+</html>

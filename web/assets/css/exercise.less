@@ -1,0 +1,64 @@
+@charset 'utf-8';
+@import 'shared';
+
+html {
+    .reset();
+    font-size: 0;
+    font-family: @mainFont;
+    body {
+        overflow: hidden;
+        .reset();
+        .mainBg();
+        nav {
+            font-size: @normalFont;
+            background: @secondaryButtonColor;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            .option {
+                .navBtn();
+            }
+        }
+        div#container {
+            margin: 60px auto;
+            width: 100%;
+            max-width: 960px;
+            
+            div#kiwiGame {
+                width: 960px !important;
+                height: 600px !important;
+                position: relative;
+                font-size: @normalFont;
+                .borderBox();
+            }
+            
+            canvas#canvas {
+               width: 800px;
+               margin: auto;
+               display: block; 
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+  body {
+      div#container {
+          width: 320px;
+      }
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 800px) {
+    body {
+        div#container {
+            width: 100%;
+        }
+    }
+}
+@media screen and (min-width: 1921px) {
+  body {
+    background-size: cover;
+  }
+}

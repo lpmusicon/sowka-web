@@ -1,0 +1,174 @@
+@charset 'utf-8';
+@import 'shared';
+
+html {
+    .reset();
+    font-size: 0;
+    body {
+        .reset();
+        .mainBg();
+        font-family: @mainFont;
+        margin: 60px 0 0;
+        nav {
+            .reset();
+            background: @secondaryButtonColor;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: auto;
+            font-size: @normalFont;
+            .navTitle {
+                .navTitle();
+            }
+            .option {
+                .navBtn();
+            }
+        }
+        
+        #container {
+		width: 80%;
+		max-width: 960px;
+		margin: auto;
+		font-size: 0;
+
+        .imageContainer {
+            margin: 10px 0;
+            width: 50%;
+            display: inline-block;
+            vertical-align: top;
+            background: @secondaryButtonColor;
+            
+            h2 {
+                .reset();
+                font-size: @normalFont;
+                font-weight: 300;
+                color: @lightTextColor;
+                .borderBox();
+                padding: 10px;
+                background: darken(@secondaryButtonColor, 5%);
+            }
+            
+            .imagePreview {
+                width: 100%;
+                height: 100%;
+            }
+            
+            .avatar {
+                width: 50%;
+                height: auto;
+                .transition(background, .2s);
+                &:hover {
+                    background: darken(@secondaryButtonColor, 10%);
+                }
+            }
+            
+            .selected {
+                background: darken(@secondaryButtonColor, 10%);
+            }
+        }
+        .floatingContainer {
+            vertical-align: top;
+            display: inline-block;
+            width: ~"calc(50% - 10px)";
+            margin: 10px 0 0 10px;
+            background: @secondaryButtonColor;
+            .genericContainer {
+                display: block;
+                .containerTitle {
+                    .borderBox();
+                    padding: 10px;
+                    font-size: @normalFont;
+                    font-weight: 300;
+                    color: @lightTextColor;
+                    background: darken(@secondaryButtonColor, 5%);
+                }
+                .readerOption {
+                    display: inline-block;
+                    width: 50%;
+                    text-align: center;
+                    .borderBox();
+                    border: 0;
+                    padding: 10px;
+                    font-size: @normalFont;
+                    font-family: @mainFont;
+                    font-weight: 300;
+                    color: @lightTextColor;
+                    background: darken(@secondaryButtonColor, 0);
+                    .transition(background, .2s);
+                    &:hover {
+                        background: darken(@secondaryButtonColor, 10%);
+                    }
+                }
+                .selected {
+                    background: darken(@secondaryButtonColor, 10%);
+                }
+                .rewardOption {
+                    display: inline-block;
+                    width: 25%;
+                    .borderBox();
+                    img {
+                        width: 100%;
+                    }
+                    .transition(background, .2s);
+                    &:hover {
+                        background: darken(@secondaryButtonColor, 10%);
+                    }
+                }
+            }
+            .submitBtn {
+                .reset();
+                width: 100%;
+                color: @lightTextColor;
+                font-size: @normalFont;
+                font-weight: 300;
+                font-family: @mainFont;
+                background: @mainButtonColor;
+                .borderBox();
+                padding: 10px;
+                .transition(background, .2s);
+                &:hover {
+                    background: darken(@mainButtonColor, 10%);
+                }
+
+			}
+		}
+	}
+        
+    }
+}
+
+@media screen and (max-width: 320px) {
+    html {
+        body {
+            div#container {
+                width: 320px;
+                .imageContainer {
+                    width: 100%;
+                }
+                .floatingContainer {
+                    width: 100%;
+                    margin: 10px 0 0;
+                }   
+            }
+        }
+    }
+}
+@media screen and (min-width: 321px) and (max-width: 800px) {
+    body {
+        div#container {
+            width: 100%;
+            .imageContainer {
+                width: 100%;
+            }
+            .floatingContainer {
+                width: 100%;
+                margin: 10px 0 0;
+            }
+        }
+    }
+}
+@media screen and (min-width: 1921px) {
+  body {
+    background-size: cover;
+  }
+}
