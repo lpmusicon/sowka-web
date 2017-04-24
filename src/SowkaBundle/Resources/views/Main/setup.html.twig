@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Dodaj profil dziecka</title>
+        <link rel="stylesheet" href="{{ asset('assets/css/addchild.css') }}" type="text/css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    </head>
+    <body>
+        <nav class="mainNavBar">
+            <div class="navTitle">Dodaj profil dziecka</div>
+        </nav>
+        <div id="container">
+            <form
+                method="post"
+                accept-charset="utf-8"
+                enctype="multipart/form-data">
+            <input name="name" type="text" required placeholder="Imię dziecka np. Tomek" />
+            <div class="imageContainer">
+                <h2>Dodaj zdjęcie dziecka lub wybierz avatar</h2>
+                <img id="imagePreview" isAvatar="false" class="imagePreview" src="{{ asset('assets/img/addimg.png') }}" onclick="addPhoto(this);"/>
+                <img class="avatar selected" isAvatar="true" isMale="true" src="{{ asset('assets/img/options/on.png') }}" onclick="selectPhoto(this);">
+                <img class="avatar" isAvatar="true" isMale="false" src="{{ asset('assets/img/options/ona.png') }}" onclick="selectPhoto(this);">
+            </div>
+            <div class="floatingContainer">
+                <!--
+                <div class="genericContainer">
+                    <div class="containerTitle">Wybierz lektora:</div>
+                    <div class="readerOption selected" isMale='true' onclick="swapReader(this);">Męski</div>
+                    <div class="readerOption" isMale='false' onclick="swapReader(this);">Żeński</div>
+                </div>-->
+                <div class="genericContainer">
+                    <div class="containerTitle">Wybierz nagrodę:</div>
+                    {% for reward in rewards %}
+                        <div class="rewardOption" rewardID="{{ reward.id }}" onclick="swapReward(this);"><img src="{{ asset(reward.image) }}" /></div>
+                    {% endfor %}
+                </div>
+                <button class="submitBtn" type="submit" value="Dodaj" id="submit">Dodaj</button>
+            </div>
+            </form>
+        </div>
+        <script src="{{ asset('assets/js/addchild.js') }}"></script>
+        <div id="info"></div>
+    </body>
+</html>

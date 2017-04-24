@@ -1,1 +1,161 @@
-@charset "utf-8";@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=latin,latin-ext);@import url(https://fonts.googleapis.com/css?family=Lato:400,300&subset=latin,latin-ext);input{margin:0;border:0;text-decoration:none;transition:background .2s ease-in-out;box-sizing:border-box;background:#fff;font-size:16px;display:block;padding:10px;width:100%;-webkit-appearance:none;border-radius:0}input:hover{background:rgba(255,255,255,.85)}::-webkit-input-placeholder{color:#5697b5;padding:0 10px 0 5px}:-moz-placeholder{color:#5697b5;opacity:1}::-moz-placeholder{color:#5697b5;opacity:1}:-ms-input-placeholder{color:#5697b5;padding:0 10px 0 5px}html{margin:0;padding:0;border:0;text-decoration:none;font-family:'Open Sans',Lato,sans-serif;font-weight:300}body{margin:0;padding:0;border:0;text-decoration:none;background:url(../img/indexbg.jpg) top center no-repeat #5aceff;background-size:auto;height:100%}#container{margin-top:230px}.pagewidth{margin:auto}.mainBox{box-sizing:border-box}#registerForm{display:none}.mainBox>form>.input{margin:0;border:0;text-decoration:none;transition:background .2s ease-in-out;box-sizing:border-box;background:#fff;font-size:16px;display:block;padding:10px;width:100%}.mainBox>form>.input:focus,.mainBox>form>.input:hover{background:rgba(255,255,255,.85)}.mainBox>form>.input:nth-child(n+1){margin:5px 0 0}.mainBox>form>.button{margin:0;border:0;text-decoration:none;transition:background .2s ease-in-out;box-sizing:border-box;color:#f5f5f5;background:#349079;font-size:18px;font-family:'Open Sans',Lato,sans-serif;font-weight:300;width:50%;padding:6px 0}.mainBox>form>.buttonW100{width:100%}.mainBox>form>.button:hover{background:#266b5a}.mainBox>form>.buttonAlt{background:#5697b5}.mainBox>form>.buttonAlt:hover{background:#427c96}footer{color:#1c1c1c;text-transform:uppercase;text-align:right;font-size:24px;position:absolute;right:0;bottom:0;padding:0 10px 5px 0}footer div strong{font-weight:400}#notificationBox{box-sizing:border-box;display:none;position:fixed;z-index:12;top:50px;left:0;right:0;margin:auto;padding:10px;font-size:24px;background:#fff}@media screen and (max-width:320px){#notificationBox,.pagewidth{width:100%}}@media screen and (min-width:480px){#notificationBox,.pagewidth{width:480px}}@media screen and (min-width:1921px){body{background-size:cover}}
+@charset "utf-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300&subset=latin,latin-ext);
+input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  transition: background 0.2s ease-in-out;
+  box-sizing: border-box;
+  background: #ffffff;
+  font-size: 16px;
+  display: block;
+  padding: 10px;
+  width: 100%;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+input:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #5697b5;
+  padding: 0 10px 0 5px;
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #5697b5;
+  opacity: 1;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #5697b5;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #5697b5;
+  padding: 0 10px 0 5px;
+}
+html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  font-family: 'Open Sans', 'Lato', sans-serif;
+  font-weight: 300;
+}
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  background: url('/assets/img/background.jpg') top center #5aceff;
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 100%;
+}
+#container {
+  margin-top: 230px;
+}
+.pagewidth {
+  margin: auto;
+}
+.mainBox {
+  box-sizing: border-box;
+}
+#registerForm {
+  display: none;
+}
+.mainBox > form > .input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  transition: background 0.2s ease-in-out;
+  box-sizing: border-box;
+  background: #ffffff;
+  font-size: 16px;
+  display: block;
+  padding: 10px;
+  width: 100%;
+}
+.mainBox > form > .input:hover,
+.mainBox > form > .input:focus {
+  background: rgba(255, 255, 255, 0.85);
+}
+.mainBox > form > .input:nth-child(n+1) {
+  margin: 5px 0 0;
+}
+.mainBox > form > .button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  transition: background 0.2s ease-in-out;
+  box-sizing: border-box;
+  color: #f5f5f5;
+  background: #349079;
+  font-size: 18px;
+  font-family: 'Open Sans', 'Lato', sans-serif;
+  font-weight: 300;
+  width: 50%;
+  padding: 6px 0;
+}
+.mainBox > form > .buttonW100 {
+  width: 100%;
+}
+.mainBox > form > .button:hover {
+  background: #266b5a;
+}
+.mainBox > form > .buttonAlt {
+  background: #5697b5;
+}
+.mainBox > form > .buttonAlt:hover {
+  background: #427c96;
+}
+footer {
+  color: #1c1c1c;
+  text-transform: uppercase;
+  text-align: right;
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0 10px 5px 0;
+}
+footer div strong {
+  font-weight: 400;
+}
+#notificationBox {
+  box-sizing: border-box;
+  display: none;
+  position: fixed;
+  z-index: 12;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 10px;
+  font-size: 24px;
+  background: #ffffff;
+}
+@media screen and (max-width: 320px) {
+  .pagewidth,
+  #notificationBox {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 480px) {
+  .pagewidth,
+  #notificationBox {
+    width: 480px;
+  }
+}
+@media screen and (min-width: 1921px) {
+  body {
+    background-size: cover;
+  }
+}

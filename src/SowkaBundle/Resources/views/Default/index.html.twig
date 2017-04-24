@@ -2,33 +2,49 @@
 <html>
     <head>
             <meta charset="utf-8" />
-            <link rel="stylesheet" href="css/index.css" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}" type="text/css" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <script src="js/jquery.min.js"></script>
+            <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     </head>
     <body>
-        <div id="notificationBox"></div>
+        <div id="notificationBox">
+            {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+        </div>
         <div id="container">
             <div class="pagewidth mainBox">
-                <img src="img/logo.png" width="50%" style="margin: auto; display: block" />
+                <img src="{{ asset('assets/img/logo.png') }}" width="50%" style="margin: auto; display: block" />
             </div>
                     <div id="login" class="pagewidth mainBox">
-                            <form autocomplete="on" id="loginForm" method="post">
-                                <input type="email" name="email" placeholder="Adres email" class="input" />
-                                <input type="password" name="password" placeholder="Hasło" class="input" />
-                                <button class="button" id="loginSubmit">Zaloguj się</button><!--
+                            <form 
+                                autocomplete="on" 
+                                id="loginForm" 
+                                method="post" 
+                                action="{{ path('index') }}">
+                                <input 
+                                    type="text" 
+                                    name="_username" 
+                                    placeholder="Nazwa użytkownika" 
+                                    class="input"
+                                    value="{{ last_username }}" />
+                                <input 
+                                    type="password" 
+                                    name="_password" 
+                                    placeholder="Hasło" 
+                                    class="input" />
+                                <button class="button" type="submit" id="loginSubmit">Zaloguj się</button><!--
                             --><button class="button buttonAlt" id="register">Rejestracja</button>
                             </form>
                     </div>
 
                     <div id="registerForm" class="pagewidth mainBox">
-                            <form autocomplete="off">
-                                <input type="text" name="name" placeholder="Imię opiekuna" class="input"/>
-                                <input type="email" name="email" placeholder="Adres email" class="input"/>
-                                <input type="password" name="password" placeholder="Hasło" class="input"/>
-                                <input type="password" name="passwordRepeat" placeholder="Powtórz hasło" class="input"/>
-                                <input id="register_send" type="submit" value="Zarejestruj" class="button buttonW100"/>
-                            </form>
+                        {{ form_start(register, {'action': path('register'),'method': 'POST'}) }}
+                            {{ form_widget(register.username, { 'attr':  {'placeholder' : 'Login', 'class' : 'input' }} ) }}
+                            {{ form_widget(register.plainPassword.first, {'attr':{'placeholder' : 'Hasło', 'class': 'input' }}) }}
+                            {{ form_widget(register.plainPassword.second, {'attr':{'placeholder' : 'Powtórz Hasło', 'class': 'input' }}) }}                        
+                            <input type="submit" value="Zarejestruj" class="button buttonW100"/>
+                        {{ form_end(register) }}
                     </div>
             <footer>
                 <div>
@@ -39,35 +55,6 @@
                 </div>
             </footer>
             <script>
-            $(document).on('click touchdown', '#loginSubmit', function(e){
-                e.preventDefault();
-                var FORM = new FormData();
-                var loginForm = $('#loginForm');
-                var email = $(loginForm).children('input[type="email"]')[0];
-                var password = $(loginForm).children('input[type="password"]')[0];
-                FORM.append('email', email.value);
-                FORM.append('password', password.value);
-                $.ajax({
-                    url: 'login.php',
-                    data: FORM,
-                    processData: false,
-                    contentType: false,
-                    type: 'POST',
-                    success: function(data){
-                        var response = JSON.parse(data);
-                        console.log(response.visibleText);
-                        if(response.loginPermitted)
-                        {
-                            window.location.href = "main.php";
-                        }
-                        else {
-                            showNotificationBox(response.visibleText);
-                            hideFullBox($('#notificationBox')[0]);
-                        }
-                    }
-                });
-            });
-
             var registerOpen = false;
             function registerToggle() {
                 if(!registerOpen) {
@@ -87,40 +74,6 @@
             $(document).on('click touchdown', '#register', function(e) {
                 e.preventDefault();
                 registerToggle();
-            })
-
-            $(document).on('click touchdown', '#register_send', function(e) {
-                e.preventDefault();
-                var FORM = new FormData();
-                var registerForm = $('#registerForm').children('form');
-                var email = registerForm.children('input[name="email"]')[0];
-                var password = registerForm.children('input[name="password"]')[0];
-                var name = registerForm.children('input[name="name"]')[0];
-                var passwordRepeat = registerForm.children('input[name="passwordRepeat"]')[0];
-
-                FORM.append('email', email.value);
-                FORM.append('password', password.value);
-                FORM.append('passwordRepeat', passwordRepeat.value);
-                FORM.append('name', name.value);
-                
-                $.ajax({
-                    url: 'register.php',
-                    data: FORM,
-                    processData: false,
-                    contentType: false,
-                    type: 'POST',
-                    success: function(data){
-                        console.log(data);
-                        var response = JSON.parse(data);
-                        console.log(response.visibleText);
-                        showNotificationBox(response.visibleText);
-                        hideFullBox($('#notificationBox')[0]);
-                        if(response.loginPermitted)
-                        {
-                            registerToggle();
-                        }
-                    }
-                });
             })
 
             function showNotificationBox(notification) {
