@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use SowkaBundle\Entity\Reward;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Table(name="users")
@@ -35,12 +37,13 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    private $isActive = true;
 
     /**
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $name;
+    private $name = '';
 
     /**
      * @ORM\Column(name="completed_setup", type="boolean")
@@ -50,15 +53,15 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="is_using_avatar", type="boolean")
      */
-    private $isUsingAvatar;
+    private $isUsingAvatar = false;
     
     /**
      * @ORM\Column(name="is_male_avatar", type="boolean")
      */
-    private $isMaleAvatar;
+    private $isMaleAvatar = false;
 
     /**
-     * @ORM\Column(name="image_path", type="string", length=255)
+     * @ORM\Column(name="image_path", type="string", length=255, nullable=true)
      */
     private $imagePath;
 

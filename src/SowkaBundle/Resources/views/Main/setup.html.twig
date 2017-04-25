@@ -11,19 +11,17 @@
             <div class="navTitle">Dodaj profil dziecka</div>
         </nav>
         <div id="container">
-            {{ 
-                form(form)
-            }}
-            <form
-                method="post"
-                accept-charset="utf-8"
-                enctype="multipart/form-data">
-            <input name="name" type="text" required placeholder="Imię dziecka np. Tomek" />
+            {{ form_start(form, { 'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_widget(form.singleReward, { 'attr' : { 'hidden': 'hidden', 'required':false}}) }}
+            {{ form_widget(form.isUsingAvatar, { 'attr' : { 'hidden': 'hidden', 'required':false}} )}}
+            {{ form_widget(form.isMaleAvatar, { 'attr' : { 'hidden': 'hidden', 'required':false}} )}}
+            {{ form_widget(form.imagePath, { 'attr' : { 'hidden': 'hidden', 'required':'false'}})}}
+            {{ form_widget(form.name, { 'attr' : { 'class': 'input', 'required':true, 'placeholder':'Imię dziecka np. Tomek'}})}}
             <div class="imageContainer">
                 <h2>Dodaj zdjęcie dziecka lub wybierz avatar</h2>
-                <img id="imagePreview" isAvatar="false" class="imagePreview" src="{{ asset('assets/img/addimg.png') }}" onclick="addPhoto(this);"/>
-                <img class="avatar selected" isAvatar="true" isMale="true" src="{{ asset('assets/img/options/on.png') }}" onclick="selectPhoto(this);">
-                <img class="avatar" isAvatar="true" isMale="false" src="{{ asset('assets/img/options/ona.png') }}" onclick="selectPhoto(this);">
+                <img id="imagePreview" isAvatar="false" class="imagePreview" src="{{ asset('assets/img/addimg.png') }}"/>
+                <img class="avatar" class="avatar" isAvatar="true" isMale="true" src="{{ asset('assets/img/options/on.png') }}">
+                <img class="avatar" class="avatar" isAvatar="true" isMale="false" src="{{ asset('assets/img/options/ona.png') }}">
             </div>
             <div class="floatingContainer">
                 <div class="genericContainer">
@@ -34,9 +32,9 @@
                 </div>
                 <button class="submitBtn" type="submit" value="Dodaj" id="submit">Dodaj</button>
             </div>
-            </form>
+            {{ form_end(form) }}
         </div>
         <script src="{{ asset('assets/js/addchild.js') }}"></script>
-        <div id="info"></div>
+        <!--<div id="info">Podaj imie dziecka</div>-->
     </body>
 </html>

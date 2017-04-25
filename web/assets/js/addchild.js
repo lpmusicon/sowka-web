@@ -1,37 +1,28 @@
-window.onload = function() {
-	$('.rewardOption').eq(1).addClass('selected');
-}
-
 //Input ze zdjęciem
-var img = document.createElement('input');
-	img.setAttribute('type','file');
-	img.setAttribute('name','childImage');
-	img.setAttribute('id','image');
+const img = document.getElementsByName('child[imagePath]')[0];
+let isUsingAvatar = document.getElementsByName('child[isUsingAvatar]')[0];
+let isMaleAvatar = document.getElementsByName('child[isMaleAvatar]')[0];;
+var rewardId = 0;
 
-//Czy używa avatara
-var isUsingAvatar = true;
-var isMaleAvatar = true;
-var isUsingMaleReader = true;
-var rewardId = 2;
+$('.avatar').on('click', (ev) => {
+	const selected = ev.target;
+	const $selected = $(selected);
 
-function selectPhoto(photo) {
-	if(photo != undefined) {
-		isUsingAvatar = ($(photo).attr('isAvatar') == 'true' ? true : false);
-		if(isUsingAvatar) isMaleAvatar = ($(photo).attr('isMale') == 'true' ? true : false);
-		$('body #container form div.imageContainer').children().removeClass('selected');
-		$(photo).addClass('selected');
-	}
-}
+	$('.avatar').removeClass('selected');
 
-function addPhoto(photo) {
-	img.click();
-	isUsingAvatar = false;
-	selectPhoto(photo);
-}
-
-$(img).change(function(){
-	readURL(img);
+	isUsingAvatar.checked = true;
+	isMaleAvatar.checked = $selected.attr('isMale') == 'true' ? true : false;
+	$selected.addClass('selected');
 });
+
+$('#imagePreview').on('click', (ev) => {
+	const selected = ev.target;
+	const $selected = $(selected);
+
+	return img.click();
+})
+
+$(img).change(() => readURL(img));
 
 function readURL(input) {
 	if (input.files && input.files[0]) {
@@ -41,6 +32,8 @@ function readURL(input) {
 				$('#imagePreview').attr('src', e.target.result);
 			});
 			$('.imageContainer').fadeIn("normal");
+			isUsingAvatar.checked = false;
+			isMaleAvatar.checked = false;
 		}
 		reader.readAsDataURL(input.files[0]);
 	}
@@ -49,6 +42,9 @@ function readURL(input) {
 function swapReward(reward) {
 	$('.rewardOption').removeClass('selected');
 	$(reward).addClass('selected');
-	rewardId = parseInt($(reward).attr('rewardID'));
+	const rewards = document.getElementsByName('child[singleReward]');
+	const newReward = $(reward).attr('rewardID');
+	rewards[newReward - 1].checked = true;
+	rewardId = parseInt(newReward);
 }
 

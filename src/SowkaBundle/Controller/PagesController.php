@@ -71,9 +71,12 @@ class PagesController extends Controller
         if(!$user->getCompletedSetup()) {
             return $this->redirectToRoute('setupChild');
         }
-        //Nie ma informacji o dziecku
-        //Dodaj informacje o dziecku
-        //Przejdz dalej
+        
+        return $this->render(
+            'SowkaBundle:Main:main.html.twig', [
+                'categories' => []
+            ]
+        )
     }
 
     /**
@@ -88,13 +91,13 @@ class PagesController extends Controller
         $form = $this->createForm(ChildType::class, $user);
 
         $form->handleRequest($request);
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setCompletedSetup(true);
+            $doctrine->persist($user);
+            $doctrine->flush();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('main');
         }
 
         return $this->render('SowkaBundle:Main:setup.html.twig', [
