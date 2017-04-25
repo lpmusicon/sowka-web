@@ -91,8 +91,12 @@ class PagesController extends Controller
     /**
      * @Route("/setup", name="setupChild")
      */
-    public function setupChildAction(Request $request, UserInterface $user)
+    public function setupChildAction(Request $request, UserInterface $user = null)
     {
+        if($user === null) {
+            return $this->redirectToRoute('logout');
+        }
+
         $doctrine = $this->getDoctrine()->getManager();
         $rewardsRepository = $doctrine->getRepository('SowkaBundle:Reward');
         $rewards = $rewardsRepository->findAll();

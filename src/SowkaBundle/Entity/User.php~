@@ -54,6 +54,13 @@ class User implements UserInterface, \Serializable
     private $plainPassword;
 
     /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive = true;
@@ -425,5 +432,4 @@ class User implements UserInterface, \Serializable
     {
         return $this->imageFile;
     }
-
 }

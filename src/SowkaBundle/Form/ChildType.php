@@ -42,7 +42,7 @@ class ChildType extends AbstractType
                 $data = $form->getData();
 
                 if(!$data->getIsUsingAvatar()) {
-                    return ['setup', 'image']
+                    return ['setup', 'image'];
                 }
 
                 return ['setup', 'avatar'];
