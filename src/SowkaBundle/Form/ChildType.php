@@ -5,6 +5,7 @@ namespace SowkaBundle\Form;
 use SowkaBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -37,6 +38,15 @@ class ChildType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => User::class,
+            'validation_groups' => function (FormInterface $form) {
+                $data = $form->getData();
+
+                if(!$data->getIsUsingAvatar()) {
+                    return ['setup', 'image']
+                }
+
+                return ['setup', 'avatar'];
+            },
         ));
     }
 }

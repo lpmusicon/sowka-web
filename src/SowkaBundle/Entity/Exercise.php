@@ -3,6 +3,7 @@
 namespace SowkaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use SowkaBundle\Entity\Category;
 
 /**
  * Exercise
@@ -24,13 +25,6 @@ class Exercise
     /**
      * @var string
      *
-     * @ORM\Column(name="exercise", type="string", length=255)
-     */
-    private $exercise;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -42,6 +36,11 @@ class Exercise
      */
     private $training;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="exercises")
+     */
+    private $category;
+
 
     /**
      * Get id
@@ -51,30 +50,6 @@ class Exercise
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set exercise
-     *
-     * @param string $exercise
-     *
-     * @return Exercise
-     */
-    public function setExercise($exercise)
-    {
-        $this->exercise = $exercise;
-
-        return $this;
-    }
-
-    /**
-     * Get exercise
-     *
-     * @return string
-     */
-    public function getExercise()
-    {
-        return $this->exercise;
     }
 
     /**
@@ -124,5 +99,28 @@ class Exercise
     {
         return $this->training;
     }
-}
 
+    /**
+     * Set category
+     *
+     * @param \SowkaBundle\Entity\Category $category
+     *
+     * @return Exercise
+     */
+    public function setCategory(\SowkaBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \SowkaBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+}

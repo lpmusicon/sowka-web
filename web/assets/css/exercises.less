@@ -6,7 +6,7 @@ html {
     body {
         font-family: @mainFont;
         font-size: 0;
-        background: url('../img/indexbg.jpg') top center @backgroundColor;
+        background: url('/assets/img/background.jpg') top center @backgroundColor;
         background-repeat: no-repeat;
         background-size: auto;
         .reset();
@@ -54,27 +54,23 @@ html {
                     padding: 10px;
                     background: darken(@secondaryButtonColor, 10%);
                 }
-                .train, .exercise, .full {
-                    .transition(background, .2s);
-                    cursor: pointer;
-                    &:hover {
-                        background: darken(@mainButtonColor, 10%);
-                    }
-                }
-                .train, .exercise {
-                    text-align: center;
-                    display: inline-block;
-                    width: 50%;
-                    .borderBox();
-                    padding: 10px;
-                    background: @mainButtonColor;
-                }
-                .full {
-                    text-align: center;
+
+                .actions {
                     width: 100%;
-                    .borderBox();
-                    padding: 10px;
-                    background: @mainButtonColor;
+                    display: flex;
+                    .action {
+                        flex-grow: 1;
+                        padding: 10px;
+                        background: @mainButtonColor;
+                        text-align: center;
+                        color: white;
+                        text-decoration: none;
+                        .borderBox();
+                        .transition(background, .2s);
+                        &:hover {
+                            background: darken(@mainButtonColor, 10%);
+                        }
+                    }
                 }
             }
         }

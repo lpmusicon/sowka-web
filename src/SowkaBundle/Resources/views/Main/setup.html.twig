@@ -1,40 +1,43 @@
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Dodaj profil dziecka</title>
-        <link rel="stylesheet" href="{{ asset('assets/css/addchild.css') }}" type="text/css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    </head>
-    <body>
-        <nav class="mainNavBar">
-            <div class="navTitle">Dodaj profil dziecka</div>
-        </nav>
-        <div id="container">
-            {{ form_start(form, { 'attr': {'novalidate': 'novalidate'}}) }}
-            {{ form_widget(form.singleReward, { 'attr' : { 'hidden': 'hidden', 'required':false}}) }}
-            {{ form_widget(form.isUsingAvatar, { 'attr' : { 'hidden': 'hidden', 'required':false}} )}}
-            {{ form_widget(form.isMaleAvatar, { 'attr' : { 'hidden': 'hidden', 'required':false}} )}}
-            {{ form_widget(form.imagePath, { 'attr' : { 'hidden': 'hidden', 'required':'false'}})}}
-            {{ form_widget(form.name, { 'attr' : { 'class': 'input', 'required':true, 'placeholder':'Imię dziecka np. Tomek'}})}}
-            <div class="imageContainer">
-                <h2>Dodaj zdjęcie dziecka lub wybierz avatar</h2>
-                <img id="imagePreview" isAvatar="false" class="imagePreview" src="{{ asset('assets/img/addimg.png') }}"/>
-                <img class="avatar" class="avatar" isAvatar="true" isMale="true" src="{{ asset('assets/img/options/on.png') }}">
-                <img class="avatar" class="avatar" isAvatar="true" isMale="false" src="{{ asset('assets/img/options/ona.png') }}">
-            </div>
-            <div class="floatingContainer">
-                <div class="genericContainer">
-                    <div class="containerTitle">Wybierz nagrodę:</div>
-                    {% for reward in rewards %}
-                        <div class="rewardOption" rewardID="{{ reward.id }}" onclick="swapReward(this);"><img src="{{ asset(reward.image) }}" /></div>
-                    {% endfor %}
-                </div>
-                <button class="submitBtn" type="submit" value="Dodaj" id="submit">Dodaj</button>
-            </div>
-            {{ form_end(form) }}
+{% extends 'SowkaBundle:Main:base.html.twig' %}
+
+{% block title %}
+	Sówka - Dodaj Profil Dziecka
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('assets/css/addchild.css') }}" type="text/css" />
+{% endblock %}
+
+{% block nav %}
+	<div class="navTitle">Dodaj profil dziecka</div>
+	<a href="/logout"><div class="actionBtn">Wyloguj</div></a>
+{% endblock %}
+
+{% block container %}
+	{{ form_start(form, { 'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form.singleReward, { 'attr' : { 'hidden': 'hidden', 'required':false}}) }}
+    {{ form_widget(form.isUsingAvatar, { 'attr' : { 'hidden': 'hidden', 'required':false}} )}}
+    {{ form_widget(form.isMaleAvatar, { 'attr' : { 'hidden': 'hidden', 'required':false}} )}}
+    {{ form_widget(form.imagePath, { 'attr' : { 'hidden': 'hidden', 'required':'false'}})}}
+    {{ form_widget(form.name, { 'attr' : { 'class': 'input', 'required':true, 'placeholder':'Imię dziecka np. Tomek'}})}}
+    <div class="imageContainer">
+        <h2>Dodaj zdjęcie dziecka lub wybierz avatar</h2>
+        <img id="imagePreview" isAvatar="false" class="imagePreview" src="{{ asset('assets/img/addimg.png') }}"/>
+        <img class="avatar" class="avatar" isAvatar="true" isMale="true" src="{{ asset('assets/img/options/on.png') }}">
+        <img class="avatar" class="avatar" isAvatar="true" isMale="false" src="{{ asset('assets/img/options/ona.png') }}">
+    </div>
+    <div class="floatingContainer">
+        <div class="genericContainer">
+            <div class="containerTitle">Wybierz nagrodę:</div>
+            {% for reward in rewards %}
+                <div class="rewardOption" rewardID="{{ reward.id }}" onclick="swapReward(this);"><img src="{{ asset(reward.image) }}" /></div>
+            {% endfor %}
         </div>
-        <script src="{{ asset('assets/js/addchild.js') }}"></script>
-        <!--<div id="info">Podaj imie dziecka</div>-->
-    </body>
-</html>
+        <button class="submitBtn" type="submit" value="Dodaj" id="submit">Dodaj</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block inline %}
+    <script src="{{ asset('assets/js/addchild.js') }}"></script>
+{% endblock %}

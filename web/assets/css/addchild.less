@@ -11,19 +11,36 @@ body {
 	background: url('/assets/img/background.jpg') top center @backgroundColor;
 	padding: 60px 0 0;
 	
-	nav.mainNavBar {
-		position: fixed;
-		top: 0;
-		width: 100%; 
-		background: @secondaryButtonColor;
-		.borderBox();
-		padding: 10px;
-		
-		div.navTitle {
-			color: @lightTextColor;
-			font-size: @normalFont;
-		}
-	}
+	nav {
+            z-index: 50;
+            background: @secondaryButtonColor;
+            font-family: @mainFont;
+            color: @lightTextColor;
+            font-size: @normalFont;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            .navTitle {
+                display: inline-block;
+                .borderBox();
+                padding: 10px;
+                font-weight: 400;
+            }
+            .actionBtn {
+                cursor: pointer;
+                color: @lightTextColor;
+                .reset();
+                float: right;
+                .borderBox();
+                padding:10px;
+                background: @mainButtonColor;
+                .transition(background, .2s);
+                &:hover {
+                    background: darken(@mainButtonColor, 10%);
+                }
+            }
+        }
 	
 	#container {
 		width: 80%;

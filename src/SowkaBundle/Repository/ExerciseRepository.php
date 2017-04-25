@@ -2,6 +2,9 @@
 
 namespace SowkaBundle\Repository;
 
+use SowkaBundle\Entity\Category;
+use SowkaBundle\Entity\Exercise;
+
 /**
  * ExerciseRepository
  *
@@ -10,4 +13,15 @@ namespace SowkaBundle\Repository;
  */
 class ExerciseRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllInCategory(Category $category)
+    {
+        return $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('e')
+            ->from('SowkaBundle:Exercise', 'e')
+            ->where('e.category = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult();
+    }
 }

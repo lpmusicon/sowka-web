@@ -7,11 +7,11 @@
             <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     </head>
     <body>
+        {% if error %}
         <div id="notificationBox">
-            {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
         </div>
+        {% endif %}
         <div id="container">
             <div class="pagewidth mainBox">
                 <img src="{{ asset('assets/img/logo.png') }}" width="50%" style="margin: auto; display: block" />
@@ -19,7 +19,7 @@
                     <div id="login" class="pagewidth mainBox">
                             <form 
                                 autocomplete="on" 
-                                id="loginForm" 
+                                id="loginForm"
                                 method="post" 
                                 action="{{ path('index') }}">
                                 <input 
@@ -40,9 +40,9 @@
 
                     <div id="registerForm" class="pagewidth mainBox">
                         {{ form_start(register, {'action': path('register'),'method': 'POST'}) }}
-                            {{ form_widget(register.username, { 'attr':  {'placeholder' : 'Login', 'class' : 'input' }} ) }}
-                            {{ form_widget(register.plainPassword.first, {'attr':{'placeholder' : 'Hasło', 'class': 'input' }}) }}
-                            {{ form_widget(register.plainPassword.second, {'attr':{'placeholder' : 'Powtórz Hasło', 'class': 'input' }}) }}                        
+                            {{ form_widget(register.username, { 'attr':  {'placeholder' : 'Login'|trans, 'class' : 'input' }} ) }}
+                            {{ form_widget(register.plainPassword.first, {'attr':{'placeholder' : 'Password'|trans, 'class': 'input' }}) }}
+                            {{ form_widget(register.plainPassword.second, {'attr':{'placeholder' : 'Repeat Password'|trans, 'class': 'input' }}) }}                        
                             <input type="submit" value="Zarejestruj" class="button buttonW100"/>
                         {{ form_end(register) }}
                     </div>

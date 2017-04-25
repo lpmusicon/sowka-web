@@ -10,7 +10,7 @@ html {
     .reset();
     body {
         .reset();
-        background: url('../img/indexbg.jpg') top center @backgroundColor;
+        background: url('/assets/img/background.jpg') top center @backgroundColor;
         background-repeat: no-repeat;
         background-size: auto;
         height: 100%;
@@ -47,8 +47,11 @@ html {
         #container {
             margin: 60px auto 30px;
             width: 540px;
+            display: flex;
+            flex-wrap: wrap;
+
             .category {
-                &[catid='1'] {
+                &[basecolor='#5b9314'] {
                    background: @greenCategory;
                    .title {
                        background: darken(@greenCategory, 5%);
@@ -57,7 +60,7 @@ html {
                        background: darken(@greenCategory, 10%);
                    }
                 }
-                &[catid='2'] {
+                &[basecolor='#243470'] {
                    background: @blueCategory;
                    .title {
                        background: darken(@blueCategory, 5%);
@@ -66,7 +69,7 @@ html {
                        background: darken(@blueCategory, 10%);
                    }
                 }
-                &[catid='3'] {
+                &[basecolor='#ad3f75'] {
                    background: @violetCategory;
                    .title {
                        background: darken(@violetCategory, 5%);
@@ -75,7 +78,7 @@ html {
                        background: darken(@violetCategory, 10%);
                    }
                 }
-                &[catid='4'] {
+                &[basecolor='#db9704'] {
                    background: @yellowCategory;
                    .title {
                        background: darken(@yellowCategory, 5%);

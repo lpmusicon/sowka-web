@@ -24,6 +24,14 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=25, unique=true, nullable=false)
+     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\Length(
+     *    min = 3,
+     *    minMessage = "Twój login musi mieć minimum trzy znaki",
+     *    max = 25,
+     *    maxMessage = "Twój login musi mieć maksymalnie 25 znaków",
+     *    groups={"registration"}
+     * )
      */
     private $username;
 
@@ -32,6 +40,16 @@ class User implements UserInterface, \Serializable
      */
     private $password;
 
+    /**
+     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\Length(
+     *    min = 3,
+     *    minMessage = "Twoje hasło musi mieć minimum trzy znaki",
+     *    max = 32,
+     *    maxMessage = "Twoje hasło musi mieć maksymalnie 32 znaki",
+     *    groups={"registration"}
+     * )
+     */
     private $plainPassword;
 
     /**
@@ -41,7 +59,15 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotNull(groups={"setup"})
+     * @Assert\NotBlank(groups={"setup"})
+     * @Assert\Length(
+     *    min = 3,
+     *    minMessage = "Imię musi mieć minimum trzy znaki",
+     *    max = 64,
+     *    maxMessage = "Imię musi mieć maksymalnie 64 znaki",
+     *    groups={"setup"}
+     * )
      */
     private $name = '';
 
@@ -51,17 +77,20 @@ class User implements UserInterface, \Serializable
     private $completedSetup = false;
     
     /**
-     * @ORM\Column(name="is_using_avatar", type="boolean")
+     * @ORM\Column(name="is_using_avatar", type="boolean", nullable=true)
+     * @Assert\NotNull(groups={"image", "avatar"})
      */
-    private $isUsingAvatar = false;
+    private $isUsingAvatar;
     
     /**
-     * @ORM\Column(name="is_male_avatar", type="boolean")
+     * @ORM\Column(name="is_male_avatar", type="boolean", nullable=true)
+     * @Assert\Null(groups={"image"})
      */
-    private $isMaleAvatar = false;
+    private $isMaleAvatar;
 
     /**
      * @ORM\Column(name="image_path", type="string", length=255, nullable=true)
+     * @Assert\Null(groups={"avatar"})
      */
     private $imagePath;
 
@@ -210,6 +239,10 @@ class User implements UserInterface, \Serializable
      */
     public function setIsUsingAvatar($isUsingAvatar)
     {
+        if($isUsingAvatar) {
+            $this->imagePath = null;
+        }
+
         $this->isUsingAvatar = $isUsingAvatar;
 
         return $this;

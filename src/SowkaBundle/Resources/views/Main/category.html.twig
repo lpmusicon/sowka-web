@@ -1,0 +1,28 @@
+{% extends 'SowkaBundle:Main:base.html.twig' %}
+
+{% block title %}
+	Sówka - Ćwiczenia
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="{{ asset('assets/css/exercises.css') }}" type="text/css" />
+{% endblock %}
+
+{% block nav %}
+	<a href="{{ path('main') }}"><div class="option">Wróć</div></a>
+    <a href="{{ path('setupChild') }}" class="option">
+        <div id="options">Opcje</div>
+    </a>
+    <div id="title">Cześć {{ app.user.name }}, wybierz grę</div>
+{% endblock %}
+
+{% block container %}
+	{% for exercise in exercises %}
+        <div class="category">
+                <div class="name">{{ exercise.getName() }}</div>
+                <div class="actions">
+                    <a class="action" href="{{ path('exercise', {'exercise': exercise.getId()}) }}">Graj</a>
+                </div>
+        </div>
+    {% endfor %}
+{% endblock %}

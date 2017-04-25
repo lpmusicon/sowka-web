@@ -54,17 +54,38 @@ body {
   background: url('/assets/img/background.jpg') top center #5aceff;
   padding: 60px 0 0;
 }
-body nav.mainNavBar {
-  position: fixed;
-  top: 0;
-  width: 100%;
+body nav {
+  z-index: 50;
   background: #5697b5;
-  box-sizing: border-box;
-  padding: 10px;
-}
-body nav.mainNavBar div.navTitle {
+  font-family: 'Open Sans', 'Lato', sans-serif;
   color: #f5f5f5;
   font-size: 18px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+body nav .navTitle {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 10px;
+  font-weight: 400;
+}
+body nav .actionBtn {
+  cursor: pointer;
+  color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  float: right;
+  box-sizing: border-box;
+  padding: 10px;
+  background: #349079;
+  transition: background 0.2s ease-in-out;
+}
+body nav .actionBtn:hover {
+  background: #266b5a;
 }
 body #container {
   width: 80%;

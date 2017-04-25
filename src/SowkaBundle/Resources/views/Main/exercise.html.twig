@@ -1,0 +1,37 @@
+{% extends 'SowkaBundle:Main:base.html.twig' %}
+
+{% block title %}
+	Sówka - Grasz w {{ exercise.name }}
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="{{ asset('assets/css/exercise.css') }}" type="text/css" />
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('assets/js/processing.min.js') }}"></script>
+{% endblock %}
+
+{% block nav %}
+	<a href="{{ path('main') }}"><div class="option">Wróć</div></a>
+{% endblock %}
+
+{% block container %}
+	<canvas id="canvas"></canvas>
+{% endblock %}
+
+{% block inline %}
+    <script>
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext('2d');
+
+        const reward = new Image();
+        reward.src = "{{ asset(app.user.getSingleReward().getImage()) }}";
+
+        const path = "{{ asset(exercise.training) }}";
+
+        $.get( path , function( data ) {
+            const processing  = new Processing(canvas, data);
+        });
+    </script>
+{% endblock %}

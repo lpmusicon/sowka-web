@@ -1,0 +1,28 @@
+{% extends 'SowkaBundle:Main:base.html.twig' %}
+
+{% block title %}
+	Sówka - Menu Główne
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" type="text/css" />
+{% endblock %}
+
+{% block nav %}
+	<div class="navTitle">Cześć {{ app.user.name }}, wybierz kategorię</div>
+	<a href="/logout"><div class="actionBtn">Wyloguj</div></a>
+	<a class="actionBtn" href="/setup"><div id="options">Opcje</div></a>
+{% endblock %}
+
+{% block container %}
+	{% for category in categories %}
+		<a href="{{ path('category', { 'category' : category.getId() }) }}">
+			<div 
+				class='category'
+				basecolor = '{{ category.getColor() }}'>
+					<p class='title'>{{ category.name }}</p>
+					<img class='image' src='{{ asset(category.getImage()) }}' />
+			</div>
+		</a>
+	{% endfor %}
+{% endblock %}

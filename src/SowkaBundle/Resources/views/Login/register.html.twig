@@ -1,3 +1,6 @@
+{% extends 'SowkaBundle:Main:base.html.twig' %}
+
+{% block container %}
 {{ form_start(form) }}
     {{ form_row(form.username) }}
     {{ form_row(form.plainPassword.first) }}
@@ -5,3 +8,5 @@
 
     <button type="submit">Register!</button>
 {{ form_end(form) }}
+
+{% endblock %}

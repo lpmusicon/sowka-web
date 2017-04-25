@@ -2,10 +2,12 @@
 
 namespace SowkaBundle\Controller;
 
-use SowkaBundle\Entity\User;
-use SowkaBundle\Form\UserType;
-use SowkaBundle\Form\ChildType;
 use SowkaBundle\Entity\Reward;
+use SowkaBundle\Entity\User;
+use SowkaBundle\Entity\Category;
+use SowkaBundle\Entity\Exercise;
+use SowkaBundle\Form\ChildType;
+use SowkaBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -66,17 +68,24 @@ class PagesController extends Controller
     /**
      * @Route("/main", name="main")
      */
-    public function mainAction(Request $request, UserInterface $user)
+    public function mainAction(Request $request, UserInterface $user = null)
     {
+        if($user === null) {
+            return $this->redirectToRoute('logout');
+        }
+
         if(!$user->getCompletedSetup()) {
             return $this->redirectToRoute('setupChild');
         }
+
+        $doctrine = $this->getDoctrine()->getManager();
+        $categoriesRepo = $doctrine->getRepository("SowkaBundle:Category");
         
         return $this->render(
             'SowkaBundle:Main:main.html.twig', [
-                'categories' => []
+                'categories' => $categoriesRepo->findAll()
             ]
-        )
+        );
     }
 
     /**
@@ -91,7 +100,6 @@ class PagesController extends Controller
         $form = $this->createForm(ChildType::class, $user);
 
         $form->handleRequest($request);
-        
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setCompletedSetup(true);
             $doctrine->persist($user);
@@ -103,6 +111,40 @@ class PagesController extends Controller
         return $this->render('SowkaBundle:Main:setup.html.twig', [
             'form' => $form->createView(),
             'rewards' => $rewards
+        ]);
+    }
+
+    /**
+     * @Route("/main/category/{category}", name="category", requirements={"category" = "\d+"})
+     */
+    public function categoryAction(Category $category = null)
+    {
+        if($category === null) {
+            return $this->redirectToRoute('main');
+        }
+
+        $exercises = $this->getDoctrine()->getManager()->getRepository("SowkaBundle:Exercise")->findAllInCategory($category);
+
+        return $this->render('SowkaBundle:Main:category.html.twig', [
+            'exercises' => $exercises
+        ]);
+    }
+
+    /**
+     * @Route("/main/exercise/{exercise}", name="exercise", requirements={"exercise" = "\d+"})
+     */
+    public function exerciseAction(Exercise $exercise = null, UserInterface $user = null)
+    {
+        if($user === null) {
+            return $this->redirectToRoute('logout');
+        }
+
+        if($exercise === null) {
+            return $this->redirectToRoute('main');
+        }
+
+        return $this->render('SowkaBundle:Main:exercise.html.twig', [
+            'exercise' => $exercise
         ]);
     }
 }

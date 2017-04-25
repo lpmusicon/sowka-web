@@ -21,6 +21,7 @@ class UserType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
+                'invalid_message' => 'Hasła muszą być identyczne.'
             ))
         ;
     }
@@ -29,6 +30,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => User::class,
+            'validation_groups' => array('registration'),
         ));
     }
 }

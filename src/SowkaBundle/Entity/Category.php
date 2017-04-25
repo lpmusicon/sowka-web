@@ -3,6 +3,8 @@
 namespace SowkaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use SowkaBundle\Entity\Exercise;
 
 /**
  * Category
@@ -34,6 +36,21 @@ class Category
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
+
+    /**
+     * @ORM\Column(name="color", type="string", length=7)
+     */
+    private $color;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Exercise", mappedBy="category")
+     */
+    private $exercises;
+
+    public function __construct() 
+    {
+        $this->exercises = new ArrayCollection();
+    }
 
 
     /**
@@ -93,5 +110,62 @@ class Category
     {
         return $this->image;
     }
-}
 
+    /**
+     * Set color
+     *
+     * @param string $color
+     *
+     * @return Category
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * Add exercise
+     *
+     * @param \SowkaBundle\Entity\Exercise $exercise
+     *
+     * @return Category
+     */
+    public function addExercise(\SowkaBundle\Entity\Exercise $exercise)
+    {
+        $this->exercises[] = $exercise;
+
+        return $this;
+    }
+
+    /**
+     * Remove exercise
+     *
+     * @param \SowkaBundle\Entity\Exercise $exercise
+     */
+    public function removeExercise(\SowkaBundle\Entity\Exercise $exercise)
+    {
+        $this->exercises->removeElement($exercise);
+    }
+
+    /**
+     * Get exercises
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExercises()
+    {
+        return $this->exercises;
+    }
+}
