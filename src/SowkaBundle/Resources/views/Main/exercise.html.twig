@@ -1,7 +1,7 @@
 {% extends 'SowkaBundle:Main:base.html.twig' %}
 
 {% block title %}
-	Sówka - Grasz w {{ exercise.name }}
+	Sówka - {{ exercise.name }}
 {% endblock %}
 
 {% block css %}
@@ -29,7 +29,7 @@
         reward.src = "{{ asset(app.user.getSingleReward().getImage()) }}";
 
         const path = "{{ asset(exercise.training) }}";
-
+        
         $.get( path , function( data ) {
             const processing  = new Processing(canvas, data);
         });

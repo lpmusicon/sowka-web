@@ -8,13 +8,15 @@
     </head>
     <body>
         {% if error %}
-        <div id="notificationBox">
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div id="notificationBox" class="box">
+            <div class="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         </div>
         {% endif %}
         <div id="container">
             <div class="pagewidth mainBox">
+            <a href="{{ path('index') }}">
                 <img src="{{ asset('assets/img/logo.png') }}" width="50%" style="margin: auto; display: block" />
+            </a>
             </div>
                     <div id="login" class="pagewidth mainBox">
                             <form 
@@ -40,10 +42,10 @@
 
                     <div id="registerForm" class="pagewidth mainBox">
                         {{ form_start(register, {'action': path('register'),'method': 'POST'}) }}
-                            {{ form_widget(register.username, { 'attr':  {'placeholder' : 'Login'|trans, 'class' : 'input' }} ) }}
-                            {{ form_widget(register.plainPassword.first, {'attr':{'placeholder' : 'Password'|trans, 'class': 'input' }}) }}
-                            {{ form_widget(register.plainPassword.second, {'attr':{'placeholder' : 'Repeat Password'|trans, 'class': 'input' }}) }}                        
-                            <input type="submit" value="Zarejestruj" class="button buttonW100"/>
+                        {{ form_widget(register.username, { 'attr':  {'placeholder' : 'Login'|trans, 'class' : 'input' }} ) }}
+                        {{ form_widget(register.plainPassword.first, {'attr':{'placeholder' : 'Password'|trans, 'class': 'input' }}) }}
+                        {{ form_widget(register.plainPassword.second, {'attr':{'placeholder' : 'Repeat Password'|trans, 'class': 'input' }}) }}                        
+                        <input type="submit" value="Zarejestruj" class="button buttonW100"/>
                         {{ form_end(register) }}
                     </div>
             <footer>

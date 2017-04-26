@@ -20,7 +20,7 @@ class ChildType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('imagePath', FileType::class)
+            ->add('imageFile', FileType::class)
             ->add('isUsingAvatar', CheckboxType::class,
                 [ 'required' => false ])
             ->add('isMaleAvatar', CheckboxType::class,

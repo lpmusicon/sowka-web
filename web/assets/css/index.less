@@ -102,9 +102,21 @@ footer div strong {
   left: 0;
   right: 0;
   margin: auto;
-  padding: 10px;
   font-size: @largeFont;
-  background: @white;
+}
+
+.box {
+  ul {
+    padding: 5px;
+    margin: 0;
+  }
+
+  ul li, .alert {
+    display: block;
+    padding: 5px 10px;
+    font-size: 24px;
+    background: @white;
+  }
 }
 
 @media screen and (max-width: 320px) {

@@ -1,0 +1,103 @@
+{% extends 'SowkaBundle:Main:base.html.twig' %}
+
+{% block title %}
+	Sówka - Ustawienia
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('assets/css/options.css') }}" type="text/css" />
+{% endblock %}
+
+{% block nav %}
+	<div class="navTitle">Ustawienia</div>
+    <a href="{{ path('logout') }}"><div class="actionBtn">Wyloguj</div></a>
+    <a href="{{ path('main') }}" class="option"><div id="optons" class="actionBtn">Strona Główna</div></a>
+{% endblock %}
+
+{% block container %}
+	{{ form_start(form, { 'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form.singleReward, { 'attr' : { 'hidden': 'hidden', 'required':false}}) }}
+    {{ form_widget(form.isUsingAvatar, { 'attr' : { 'hidden': 'hidden', 'required':false}} )}}
+    {{ form_widget(form.isMaleAvatar, { 'attr' : { 'hidden': 'hidden', 'required':false}} )}}
+    {{ form_widget(form.imageFile, { 'attr' : { 'required':'false', 'hidden':'hidden'}})}}
+    {{ form_widget(form.name, { 'attr' : { 'class': 'input', 'required':true, 'placeholder':'name_placeholder'}})}}
+    <div class="imageContainer">
+        <h2>Dodaj zdjęcie dziecka lub wybierz avatar</h2>
+        {% if app.user.imagePath %}
+            <img id="imagePreview" class="imagePreview" src="/uploads{{ asset(app.user.imagePath) }}"/>
+        {% else %}
+            <img id="imagePreview" isAvatar="false" class="imagePreview" src="{{ asset('assets/img/addimg.png') }}"/>
+        {% endif %}
+        <img class="avatar {% if app.user.isUsingAvatar and app.user.isMaleAvatar %}selected{% endif %}" isMale="true" src="{{ asset('assets/img/options/on.png') }}">
+        <img class="avatar {% if app.user.isUsingAvatar and not app.user.isMaleAvatar %}selected{% endif %}" isMale="false" src="{{ asset('assets/img/options/ona.png') }}">
+    </div>
+    <div class="floatingContainer">
+        <div class="genericContainer">
+            <div class="containerTitle">Wybierz nagrodę:</div>
+            {% for reward in rewards %}
+                <div class="rewardOption {% if app.user.getSingleReward().id == reward.id %}selected{% endif %}" rewardID="{{ reward.id }}" onclick="swapReward(this);"><img src="{{ asset(reward.image) }}" /></div>
+            {% endfor %}
+        </div>
+        <button class="submitBtn" type="submit" value="Dodaj" id="submit">Aktualizuj</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block inline %}
+    <script>
+        //Input ze zdjęciem
+        const img = document.getElementsByName('child[imageFile]')[0];
+        let isUsingAvatar = document.getElementsByName('child[isUsingAvatar]')[0];
+        let isMaleAvatar = document.getElementsByName('child[isMaleAvatar]')[0];
+        var rewardId = 0;
+
+        $('.avatar').on('click', (ev) => {
+            const selected = ev.target;
+            const $selected = $(selected);
+
+            $('.avatar').removeClass('selected');
+
+            isUsingAvatar.checked = true;
+            isMaleAvatar.checked = $selected.attr('isMale') == 'true' ? true : false;
+            $selected.addClass('selected');
+        });
+
+        $('#imagePreview').on('click', (ev) => {
+            const selected = ev.target;
+            const $selected = $(selected);
+
+            return img.click();
+        })
+
+        $(img).change(() => readURL(img));
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.imageContainer').fadeOut("normal", function() {
+                        $('#imagePreview').attr('src', e.target.result);
+                    });
+                    $('.imageContainer').fadeIn("normal");
+                    isUsingAvatar.checked = false;
+                    isMaleAvatar.checked = false;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function swapReward(reward) {
+            $('.rewardOption').removeClass('selected');
+            $(reward).addClass('selected');
+            const rewards = document.getElementsByName('child[singleReward]');
+            const newReward = $(reward).attr('rewardID');
+            for(let i = 0; i < rewards.length; i++)
+            {
+                if(rewards[i].value == newReward) {
+                    rewards[i].checked = true;
+                }
+            }
+            rewardId = parseInt(newReward);
+        }
+    </script>
+{% endblock %}

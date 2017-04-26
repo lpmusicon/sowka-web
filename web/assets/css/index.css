@@ -137,7 +137,16 @@ footer div strong {
   left: 0;
   right: 0;
   margin: auto;
-  padding: 10px;
+  font-size: 24px;
+}
+.box ul {
+  padding: 5px;
+  margin: 0;
+}
+.box ul li,
+.box .alert {
+  display: block;
+  padding: 5px 10px;
   font-size: 24px;
   background: #ffffff;
 }

@@ -4,17 +4,17 @@ void setup() {
     stroke(255);
     imageMode(CENTER);
     noStroke();
-    /* @pjs font='fonts/Lato-Light.ttf'; */
-    /* @pjs image='img/exercises/toys/ball.png'; */
-	/* @pjs image='img/exercises/toys/bear.png'; */
-	/* @pjs image='img/exercises/toys/car.png'; */
-	/* @pjs image='img/exercises/toys/cart.png'; */
-	/* @pjs image='img/exercises/toys/clown.png'; */
-	/* @pjs image='img/exercises/toys/doll.png'; */
-	/* @pjs image='img/exercises/toys/plane.png'; */
-	/* @pjs image='img/exercises/toys/train.png'; */
+    /* @pjs font='/assets/fonts/lato-light.ttf'; */
+    /* @pjs image='/assets/img/toys/ball.png'; */
+	/* @pjs image='/assets/img/toys/bear.png'; */
+	/* @pjs image='/assets/img/toys/car.png'; */
+	/* @pjs image='/assets/img/toys/cart.png'; */
+	/* @pjs image='/assets/img/toys/clown.png'; */
+	/* @pjs image='/assets/img/toys/doll.png'; */
+	/* @pjs image='/assets/img/toys/plane.png'; */
+	/* @pjs image='/assets/img/toys/train.png'; */
     PFont latoLight;
-    latoLight = createFont('fonts/Lato-Light.ttf');
+    latoLight = createFont('/assets/fonts/lato-light.ttf');
     textFont(latoLight);
     rectMode(CENTER);
 }
@@ -53,14 +53,14 @@ var drawing = function(tekst, img) {
     }
 }
 
-elements.add(new drawing('Piłka', 'img/exercises/toys/ball.png'));
-elements.add(new drawing('Miś', 'img/exercises/toys/bear.png'));
-elements.add(new drawing('Samochodzik', 'img/exercises/toys/car.png'));
-elements.add(new drawing('Wózek', 'img/exercises/toys/cart.png'));
-elements.add(new drawing('Klaun', 'img/exercises/toys/clown.png'));
-elements.add(new drawing('Lalka', 'img/exercises/toys/doll.png'));
-elements.add(new drawing('Samolot', 'img/exercises/toys/plane.png'));
-elements.add(new drawing('Kolejka', 'img/exercises/toys/train.png'));
+elements.add(new drawing('Piłka', '/assets/img/toys/ball.png'));
+elements.add(new drawing('Miś', '/assets/img/toys/bear.png'));
+elements.add(new drawing('Samochodzik', '/assets/img/toys/car.png'));
+elements.add(new drawing('Wózek', '/assets/img/toys/cart.png'));
+elements.add(new drawing('Klaun', '/assets/img/toys/clown.png'));
+elements.add(new drawing('Lalka', '/assets/img/toys/doll.png'));
+elements.add(new drawing('Samolot', '/assets/img/toys/plane.png'));
+elements.add(new drawing('Kolejka', '/assets/img/toys/train.png'));
 
 void draw() {
     background(#5697b5);

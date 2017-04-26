@@ -1,12 +1,61 @@
-{% extends 'SowkaBundle:Main:base.html.twig' %}
+<!doctype html>
+<html>
+    <head>
+            <meta charset="utf-8" />
+            <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}" type="text/css" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    </head>
+    <body>
+        <div id="container">
+            <div class="pagewidth mainBox">
+                <a href="{{ path('index') }}">
+                    <img src="{{ asset('assets/img/logo.png') }}" width="50%" style="margin: auto; display: block" />
+                </a>
+            </div>
+                <div id="registerForm" class="pagewidth mainBox" style="display: block">
+                    {{ form_start(form, {'action': path('register'),'method': 'POST'}) }}
+                    <div id="notificationBox" class="box">
+                        <div>{{ form_errors(form.username) }}</div>
+                        <div>{{ form_errors(form.plainPassword.first) }}</div>
+                        <div>{{ form_errors(form.plainPassword.second) }}</div>
+                    </div>
+                    {{ form_widget(form.username, { 'attr':  {'placeholder' : 'Login'|trans, 'class' : 'input' }} ) }}
+                    {{ form_widget(form.plainPassword.first, {'attr':{'placeholder' : 'Password'|trans, 'class': 'input' }}) }}
+                    {{ form_widget(form.plainPassword.second, {'attr':{'placeholder' : 'Repeat Password'|trans, 'class': 'input' }}) }}                        
+                    <input type="submit" value="Zarejestruj" class="button buttonW100"/>
+                    {{ form_end(form) }}
+                </div>
+            <footer>
+                <div>
+                    <strong>Grzegorz </strong>Mrózek
+                </div>
+                <div>
+                    <strong>Marcin </strong>Wróblewski
+                </div>
+            </footer>
+            <script>
+            var registerOpen = false;
+            function registerToggle() {
+                if(!registerOpen) {
+                    $('#container').animate({'margin-top': '135px'}, 250);
+                    $('#registerForm').fadeIn("normal", function(){
+                    });
+                    registerOpen = true;
+                }
+                else {
+                    $('#registerForm').fadeOut(250, function(){
+                        $('#container').animate({'margin-top': '230px'}, 250);
+                    });
+                    registerOpen = false;
+                }
+            };
 
-{% block container %}
-{{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
-
-    <button type="submit">Register!</button>
-{{ form_end(form) }}
-
-{% endblock %}
+            $(document).on('click touchdown', '#register', function(e) {
+                e.preventDefault();
+                registerToggle();
+            })
+            </script>
+            </div>
+    </body>
+</html>

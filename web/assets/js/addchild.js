@@ -1,5 +1,5 @@
 //Input ze zdjęciem
-const img = document.getElementsByName('child[imagePath]')[0];
+const img = document.getElementsByName('child[imageFile]')[0];
 let isUsingAvatar = document.getElementsByName('child[isUsingAvatar]')[0];
 let isMaleAvatar = document.getElementsByName('child[isMaleAvatar]')[0];;
 var rewardId = 0;
@@ -44,7 +44,12 @@ function swapReward(reward) {
 	$(reward).addClass('selected');
 	const rewards = document.getElementsByName('child[singleReward]');
 	const newReward = $(reward).attr('rewardID');
-	rewards[newReward - 1].checked = true;
+	for(let i = 0; i < rewards.length; i++)
+	{
+		if(rewards[i].value == newReward) {
+			rewards[i].checked = true;
+		}
+	}
 	rewardId = parseInt(newReward);
 }
 

@@ -10,8 +10,8 @@
 
 {% block nav %}
 	<div class="navTitle">Cześć {{ app.user.name }}, wybierz kategorię</div>
-	<a href="/logout"><div class="actionBtn">Wyloguj</div></a>
-	<a class="actionBtn" href="/setup"><div id="options">Opcje</div></a>
+	<a href="{{ path('logout') }}"><div class="actionBtn">Wyloguj</div></a>
+	<a class="actionBtn" href="{{ path('options') }}"><div id="options">Opcje</div></a>
 {% endblock %}
 
 {% block container %}

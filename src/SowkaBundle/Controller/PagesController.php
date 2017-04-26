@@ -29,7 +29,7 @@ class PagesController extends Controller
 
         $form = $this->createForm(UserType::class, new User);
 
-        return $this->render('SowkaBundle:Default:index.html.twig', [
+        return $this->render('SowkaBundle:Main:index.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error,
             'register' => $form->createView()
@@ -113,6 +113,30 @@ class PagesController extends Controller
         }
 
         return $this->render('SowkaBundle:Main:setup.html.twig', [
+            'form' => $form->createView(),
+            'rewards' => $rewards
+        ]);
+    }
+
+    /**
+     * @Route("/options", name="options")
+     */
+    public function optionsAction(UserInterface $user = null, Request $request)
+    {
+        $doctrine = $this->getDoctrine()->getManager();
+        $rewardsRepository = $doctrine->getRepository('SowkaBundle:Reward');
+        $rewards = $rewardsRepository->findAll();
+
+        $form = $this->createForm(ChildType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $doctrine->persist($user);
+            $doctrine->flush();
+
+            return $this->redirectToRoute('main');
+        }
+
+        return $this->render('SowkaBundle:Main:options.html.twig', [
             'form' => $form->createView(),
             'rewards' => $rewards
         ]);

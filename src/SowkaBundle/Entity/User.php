@@ -8,10 +8,13 @@ use SowkaBundle\Entity\Reward;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Table(name="users")
  * @ORM\Entity()
+ * @UniqueEntity(fields={"username"}, message="Taki użytkownik już istnieje", groups={"registration"})
  * @Vich\Uploadable
  */
 class User implements UserInterface, \Serializable
@@ -24,7 +27,7 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=25, unique=true, nullable=false, name="username")
      * @Assert\NotBlank(groups={"registration"})
      * @Assert\Length(
      *    min = 3,
@@ -95,6 +98,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @Vich\UploadableField(mapping="child_image", fileNameProperty="imagePath")
+     * @Assert\Image(groups={"image"})
      */
     private $imageFile;
 
@@ -397,7 +401,7 @@ class User implements UserInterface, \Serializable
         if(!$reward) {
             return;
         }
-
+        $this->reward->clear();
         $this->reward->add($reward);
         return $this;
     }
@@ -410,10 +414,6 @@ class User implements UserInterface, \Serializable
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
-
-        if ($image) {
-            $this->updatedAt = new \DateTimeImmutable();
-        }
         
         return $this;
     }
