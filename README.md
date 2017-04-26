@@ -1,4 +1,10 @@
-sowka-web
+Sówka Web App
 =========
 
-A Symfony project created on April 24, 2017, 11:03 am.
+Wymagania:  
+    -PHP CLI
+    -MySQL
+    -Composer (PHP)
+    -Dostęp do internetu w celu ściągnięcia depedencies
+    -Przeglądarka
+    -Konsola Windows/Linux
