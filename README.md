@@ -1,10 +1,10 @@
 Sówka Web App
 =========
 
-Wymagania:  
-    -PHP CLI
-    -MySQL
-    -Composer (PHP)
-    -Dostęp do internetu w celu ściągnięcia depedencies
-    -Przeglądarka
-    -Konsola Windows/Linux
+Wymagania:<br>
+    -PHP CLI<br>
+    -MySQL<br>
+    -Composer (PHP)<br>
+    -Dostęp do internetu w celu ściągnięcia depedencies<br>
+    -Przeglądarka<br>
+    -Konsola/Bash
